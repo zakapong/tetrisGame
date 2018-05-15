@@ -3,14 +3,19 @@ const context = canvas.getContext('2d');
 
 context.scale (20, 20);
 
-context.fillStyle = '#000';
-context.fillRect(0, 0, canvas.width, canvas.height);
+
 
 const matrix = [
     [0, 0, 0],
     [1, 1, 1],
     [0, 1, 0],
 ];
+
+function draw(){
+    context.fillStyle = '#000';
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    drawMatrix(player.matrix, player.pos);
+}
 
 
 function drawMatrix (matrix, offset){
@@ -26,6 +31,11 @@ function drawMatrix (matrix, offset){
       });
 }
 
+function update(){
+    draw();
+    requestAnimationFrame(update);
+}
+
 const player = {
     pos: {x:5, y:5},
     matrix: matrix,
@@ -33,3 +43,4 @@ const player = {
 
 drawMatrix(player.matrix, player.pos);
 
+update();
